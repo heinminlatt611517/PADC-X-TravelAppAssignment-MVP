@@ -13,6 +13,7 @@ class TourApp : Application(){
         super.onCreate()
         context=applicationContext
 
+        //initialize database
         ToursModelImpl.initModel(applicationContext)
     }
 }
