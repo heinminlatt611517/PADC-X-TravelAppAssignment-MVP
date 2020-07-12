@@ -8,7 +8,7 @@ import com.myanmaronlinecreations.padc_x_travelappassignment_mvp.mvp.views.Detai
 
 class DetailPresenterImpl : DetailPresenter,AbstractBasePresenter<DetailView>() {
 
-    private var mTourModel : ToursModel=ToursModelImpl
+    var mTourModel : ToursModel=ToursModelImpl
 
     override fun getTourByName(lifecycleOwner: LifecycleOwner, name: String) {
         mTourModel.getToursByName(name)

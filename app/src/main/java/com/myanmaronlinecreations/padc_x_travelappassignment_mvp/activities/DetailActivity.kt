@@ -37,10 +37,9 @@ class DetailActivity : BaseActivity(),DetailView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
-        val tourName=intent.getStringExtra(TOURS_NAME_EXTRA)
 
         setUpPresenter()
-        mPresenter.getTourByName(this,tourName)
+        intent.getStringExtra(TOURS_NAME_EXTRA)?.let { mPresenter.getTourByName(this, it) }
     }
 
     private fun setUpPresenter(){
