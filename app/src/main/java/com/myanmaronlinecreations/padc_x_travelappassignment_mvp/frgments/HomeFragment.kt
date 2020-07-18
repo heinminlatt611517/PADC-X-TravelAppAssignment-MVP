@@ -2,6 +2,7 @@ package com.myanmaronlinecreations.padc_x_travelappassignment_mvp.frgments
 
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -19,7 +20,9 @@ import com.myanmaronlinecreations.padc_x_travelappassignment_mvp.mvp.presenter.H
 import com.myanmaronlinecreations.padc_x_travelappassignment_mvp.mvp.presenter.HomePresenterImpl
 import com.myanmaronlinecreations.padc_x_travelappassignment_mvp.mvp.views.HomeView
 import com.myanmaronlinecreations.padc_x_travelappassignment_mvp.views.viewpods.EmptyViewPod
+import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.toObservable
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
@@ -65,6 +68,7 @@ class HomeFragment : Fragment(),HomeView {
 
         mPresenter.onUiReady()
 
+
     }
 
     companion object {
@@ -77,6 +81,90 @@ class HomeFragment : Fragment(),HomeView {
                 }
             }
     }
+
+//    private fun testRxOperator(){
+//        getOneToTenNumber().toObservable()
+//            .filter { it%2==0 }
+//            .subscribe {
+//               Log.d("Filter",it.toString())
+//            }
+//
+//        Observable.fromIterable(getOneToTenNumber())
+//            .firstElement()
+//            .subscribe {
+//                Log.d("FirstElement",it.toString())
+//            }
+//        getOneToTenNumber().toObservable()
+//            .lastElement()
+//            .subscribe{
+//                Log.d("LastElement",it.toString())
+//            }
+//        getOneToTenNumber().toObservable()
+//            .skip(4)
+//            .subscribe {
+//                Log.d("skip",it.toString())
+//            }
+//        Observable.fromIterable(getOneToTenNumber())
+//            .take(2)
+//            .subscribe {
+//                Log.d("take",it.toString())
+//            }
+//
+//        //Transforming operator
+//        Observable.fromIterable(getOneToTenNumber())
+//            .map { it*10 }
+//            .subscribe {
+//                Log.d("Map",it.toString())
+//            }
+//
+//        Observable.fromIterable(getOneToTenNumber())
+//            .buffer(3)
+//            .subscribe {
+//                Log.d("buffer",it.toString())
+//            }
+//
+//        getOneToTenNumber().toObservable()
+//            .scan {a,b -> a+b}
+//            .subscribe {
+//                Log.d("scan",it.toString())
+//            }
+//
+//        (1..100).toList().toObservable()
+//            .skip(50)
+//            .filter { it % 2 != 0 }
+//            .map { it*20 }
+//            .subscribe {
+//                Log.d("Hello",it.toString())
+//            }
+//
+//
+//        //Conditional operator
+//
+//        getOneToTenNumber().toObservable()
+//            .all { it != 101 }
+//            .subscribe { result ->
+//                Log.d("All",result.toString())
+//            }
+//
+//        Observable.fromIterable(getOneToTenNumber())
+//            .skipWhile { it != 56 }
+//            .subscribe {
+//                Log.d("SkipWhile",it.toString())
+//            }
+//
+//        Observable.fromIterable(getOneToTenNumber())
+//            .takeWhile { it != 12 }
+//            .subscribe {
+//                Log.d("TakeWhile",it.toString())
+//            }
+//
+//        Observable.fromIterable(getOneToTenNumber())
+//            .reduce { t1: Int, t2: Int -> t1+t2 }
+//            .subscribe {
+//                Log.d("Reduce",it.toString())
+//            }
+//    }
+
 
     private fun setUpTourRecyclerView(){
         mTourListAdapter= TourListAdapter(mPresenter)
@@ -113,6 +201,7 @@ class HomeFragment : Fragment(),HomeView {
     }
 
     override fun displayToursList(toursList: ToursAndCountriesVO) {
+
       mTourListAdapter.setNewData(toursList.tours.toMutableList())
         mPopularListAdapter.setNewData(toursList.country.toMutableList())
     }
@@ -140,4 +229,8 @@ class HomeFragment : Fragment(),HomeView {
     override fun showErrorMessage(message: String) {
       showErrorMessage(message)
     }
+
+//    private fun getOneToTenNumber() : List<Int>{
+//        return (1..100).toList()
+//    }
 }
